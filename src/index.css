@@ -42,6 +42,9 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+* {
+	box-sizing: border-box;
+}
 .container {
   padding: 24px;
   min-height: 100vh;
