@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import NewsBanner from '../../components/NewsBanner/NewsBanner';
 import styles from './styles.module.css';
-import { getNews } from '../../api/apiNews';
+import { getCategories, getNews } from '../../api/apiNews';
 import { NewsList } from '../../components/NewsList/NewsList';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import Pagination from '../../components/Pagination/Pagination';
@@ -10,6 +10,8 @@ export default function Main() {
     const [news, setNews] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
+    const [categories, setCategories] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState('All');
 
     const totalPages = 10;
     const pageSize = 10;
@@ -26,6 +28,19 @@ export default function Main() {
             console.log(error);
         }
     }
+
+    async function fetchCategories(currentPage) {
+        try {
+            const response = await getCategories();
+            setCategories(["All", ...response.categories]);
+        } catch(error) {
+            console.log(error);
+        }
+    }
+    console.log(categories);
+    useEffect(() => {
+        fetchCategories();
+    }, [])
 
     useEffect(()=> {
         fetchNews(currentPage);
