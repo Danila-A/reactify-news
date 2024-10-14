@@ -6,13 +6,18 @@ import { NewsList } from '../../components/NewsList/NewsList';
 import Skeleton from '../../components/Skeleton/Skeleton';
 import Pagination from '../../components/Pagination/Pagination';
 import Categories from '../../components/Categories/Categories';
+import Search from '../../components/Search/Search';
+import { useDebounce } from '../../helpers/hooks/useDebounce';
 
 export default function Main() {
     const [news, setNews] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [categories, setCategories] = useState([]);
+    const [keywords, setKeywords] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
+
+    const debouncedKeywords = useDebounce(keywords, 1500);
 
     const totalPages = 10;
     const pageSize = 10;
@@ -24,7 +29,8 @@ export default function Main() {
             const response = await getNews({
                 page_number: currentPage,
                 page_size: pageSize,
-                category: selectedCategory === 'All' ? null : selectedCategory
+                category: selectedCategory === 'All' ? null : selectedCategory,
+                keywords: keywords,
             });
             setNews(response.news);
             
@@ -49,7 +55,7 @@ export default function Main() {
 
     useEffect(()=> {
         fetchNews(currentPage);
-    }, [currentPage, selectedCategory])
+    }, [currentPage, selectedCategory, keywords])
 
     function handleNextPage() {
         if( currentPage < totalPages ) {
@@ -66,11 +72,12 @@ export default function Main() {
     function handlePageClick(pageNumber) {
         setCurrentPage(pageNumber);
     }
-
+    console.log(keywords);
     return (
         <main className={ styles.main }>
             <Categories categories={ categories } selectedCategory={ selectedCategory } setSelectedCategory={ setSelectedCategory }/>
 
+            <Search keywords={ keywords } setKeywords={ setKeywords }/>
 
             { news.length > 0 && !isLoading ? <NewsBanner item={ news[0] } /> : <Skeleton count={ 1 } type={ 'banner' } /> }
 
