@@ -30,7 +30,7 @@ export default function Main() {
                 page_number: currentPage,
                 page_size: pageSize,
                 category: selectedCategory === 'All' ? null : selectedCategory,
-                keywords: keywords,
+                keywords: debouncedKeywords,
             });
             setNews(response.news);
             
@@ -55,7 +55,7 @@ export default function Main() {
 
     useEffect(()=> {
         fetchNews(currentPage);
-    }, [currentPage, selectedCategory, keywords])
+    }, [currentPage, selectedCategory, debouncedKeywords])
 
     function handleNextPage() {
         if( currentPage < totalPages ) {
@@ -72,7 +72,7 @@ export default function Main() {
     function handlePageClick(pageNumber) {
         setCurrentPage(pageNumber);
     }
-    console.log(keywords);
+
     return (
         <main className={ styles.main }>
             <Categories categories={ categories } selectedCategory={ selectedCategory } setSelectedCategory={ setSelectedCategory }/>
