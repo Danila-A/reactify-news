@@ -1,7 +1,8 @@
 import NewsItem from '../NewsItem/NewsItem';
 import styles from './styles.module.css';
+import withSkeleton from '../../helpers/hocs/withSkeleton';
 
-export function NewsList({ news }) {
+function NewsList({ news }) {
     return (
         <ul className={ styles.list }>
             {news.map((item) => {
@@ -10,3 +11,7 @@ export function NewsList({ news }) {
         </ul>
     );
 }
+
+const NewsListWithSkeleton = withSkeleton(NewsList, 'news', 10);
+
+export default NewsListWithSkeleton;

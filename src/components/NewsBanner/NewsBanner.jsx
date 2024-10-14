@@ -1,8 +1,9 @@
 import styles from './styles.module.css';
 import { formatTimeAgo } from '../../helpers/formatTimeAgo';
 import Image from '../Image/Image';
+import withSkeleton from '../../helpers/hocs/withSkeleton';
 
-export default function NewsBanner({ item }) {
+function NewsBanner({ item }) {
     return (
         <section className={ styles.banner }>
 
@@ -13,5 +14,9 @@ export default function NewsBanner({ item }) {
             </p>
 
         </section>
-    )
+    );
 }
+
+const NewsBannerWithSkeleton = withSkeleton(NewsBanner, 'banner', 1);
+
+export default NewsBannerWithSkeleton;
