@@ -9,6 +9,8 @@ import { useDebounce } from '../../helpers/hooks/useDebounce';
 import { PAGE_SIZE, TOTAL_PAGES } from '../../constants/constants';
 import { useFetch } from '../../helpers/hooks/useFetch';
 import { useFilters } from '../../helpers/hooks/useFilters';
+import LatestNews from '../../components/LatestNews/LatestNews';
+import NewsByFilters from '../../components/NewsByFilters/NewsByFilters';
 
 export default function Main() {
     const { filters, changeFilter } = useFilters({
@@ -26,27 +28,30 @@ export default function Main() {
         keywords: debouncedKeywords,
     });
 
-    const {data: dataCategories} = useFetch(getCategories);
+    // const {data: dataCategories} = useFetch(getCategories);
 
-    function handleNextPage() {
-        if( filters.page_number < TOTAL_PAGES ) {
-            changeFilter('page_number', filters.page_number + 1);
-        }
-    }
+    // function handleNextPage() {
+    //     if( filters.page_number < TOTAL_PAGES ) {
+    //         changeFilter('page_number', filters.page_number + 1);
+    //     }
+    // }
 
-    function handlePreviousPage() {
-        if( filters.page_number > 1 ) {
-            changeFilter('page_number', filters.page_number - 1);
-        }
-    }
+    // function handlePreviousPage() {
+    //     if( filters.page_number > 1 ) {
+    //         changeFilter('page_number', filters.page_number - 1);
+    //     }
+    // }
 
-    function handlePageClick(pageNumber) {
-        changeFilter('page_number', pageNumber);
-    }
+    // function handlePageClick(pageNumber) {
+    //     changeFilter('page_number', pageNumber);
+    // }
 
     return (
         <main className={ styles.main }>
-            { dataCategories ? (
+            <LatestNews isLoading={ isLoading } banners={ data && data.news } />
+
+            <NewsByFilters news={ data?.news } isLoading={ isLoading } filters={ filters } changeFilter={ changeFilter } />
+            {/* { dataCategories ? (
                 <Categories 
                     categories={ dataCategories.categories } 
                     selectedCategory={ filters.category } 
@@ -56,10 +61,7 @@ export default function Main() {
 
             <Search keywords={ filters.keywords } setKeywords={ (keywords) => changeFilter('keywords', keywords) } />
 
-            <NewsBanner 
-                isLoading={ isLoading } 
-                item={ data && data.news && data.news[0] }
-            />
+            <LatestNews isLoading={ isLoading } banners={ data && data.news } />
 
             <Pagination 
                 handleNextPage={ handleNextPage } 
@@ -77,7 +79,7 @@ export default function Main() {
                 handlePageClick={ handlePageClick } 
                 currentPage={ filters.page_number }
                 totalPages={ TOTAL_PAGES } 
-            />
+            /> */}
         </main>
     )
 }
