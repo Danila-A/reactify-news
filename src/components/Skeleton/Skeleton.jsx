@@ -1,11 +1,11 @@
 import styles from './styles.module.css';
 
-export default function Skeleton({ count = 1, type = 'banner' }) {
+export default function Skeleton({ count = 1, type = 'banner', direction='column' }) {
     const list = [1, 2, 3, 4, 4, 4, 4, 4, 4, 4];
     return (
         <>
             { count > 1 ? (
-                <ul className={ styles.list }>
+                <ul className={ direction === 'column' ? styles.columnList : styles.rowList }>
                     {/* 
                         Символ "_" в аргументах - это переменная которая используется как placeholder для аргумента, 
                         который не будет использован в теле функции. В данном случае, это соглашение, которое показывает, 
