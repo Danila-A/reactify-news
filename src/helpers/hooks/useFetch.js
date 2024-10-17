@@ -20,6 +20,7 @@ export function useFetch(fetchFunction, params) {
                 setIsLoading(false);
             }
         })();
+        // Посмотреть как это useEffect может зависить от функции
     }, [ fetchFunction, stringParams ])
 
     return { data, isLoading, error };
