@@ -5,7 +5,7 @@ function withSkeleton(Component, type, count, direction) {
         const {isLoading, ...restProps} = props;
 
         if (isLoading) {
-            return <Skeleton type={ type } count={ count } direction={direction} />
+            return <Skeleton type={ type } count={ count } direction={ direction } />
         }
         
         return <Component { ...restProps } />

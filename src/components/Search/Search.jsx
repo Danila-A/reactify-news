@@ -8,7 +8,7 @@ export default function Search({ keywords, setKeywords }) {
                 value={ keywords } 
                 onChange={ (e) => setKeywords(e.target.value) }
                 className={ styles.input }
-                placeholder='JavaScript'
+                placeholder='Search'
             />
         </div>
     )

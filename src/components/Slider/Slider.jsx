@@ -10,7 +10,6 @@ export default function Slider({ children, step = 150 }) {
 
     function scrollRight() {
         sliderRef.current.scrollLeft += step;
-        console.log(sliderRef.current.scrollLeft);
     }
 
     return (

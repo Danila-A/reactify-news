@@ -19,7 +19,6 @@ export default function NewsByFilters() {
 
     const debouncedKeywords = useDebounce(filters.keywords, 1500);
 
-    // Спросить GPT про данный синтаксис
     const {data, isLoading} = useFetch(getNews, {
         ...filters,
         keywords: debouncedKeywords,

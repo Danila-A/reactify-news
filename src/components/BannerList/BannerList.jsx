@@ -5,6 +5,12 @@ import styles from './styles.module.css';
 function BannersList({ banners }) {
     return (
         <ul className={ styles.banners }>
+            {/* 
+                ?. - это опциональная цепочка.
+                Опциональная цепочка(?.) позволяет безопасно обращаться к свойсвам или методам объектов,
+                котоыре могут быть null или undefined. Елси занчение перед ?. - этo null или undefined, операция прекращается, и 
+                результатом будет undefined, вместо того, чтобы выбросить ошибку.
+            */}
             { banners?.map((banner) => {
                 return <NewsBanner key={ banner.id } item={ banner } />;
             })}
