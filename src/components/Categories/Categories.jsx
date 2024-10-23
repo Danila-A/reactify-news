@@ -48,7 +48,8 @@ const Categories = forwardRef(
                         <button 
                             onClick={ () => setSelectedCategory(category) } 
                             className={ selectedCategory === category ? styles.active : styles.item } 
-                            key={ category }>
+                            key={ category }
+                        >
                             { category }
                         </button>
                     )
@@ -58,6 +59,10 @@ const Categories = forwardRef(
     }
 );
 
+// Свойство компонента displayName используетс в сообщениях дебагинга.
+// Иначе может возникнуть ошибка в компоненте, но в сообщении об ошибке
+// будет просто указан название component, и тебе будет не понятно
+// где находиться ошибка.
 Categories.displayName = 'Categories';
 
 export default Categories;

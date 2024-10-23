@@ -19,7 +19,7 @@ export default function NewsByFilters() {
 
     const debouncedKeywords = useDebounce(filters.keywords, 1500);
 
-    const {data, isLoading} = useFetch(getNews, {
+    const { data, isLoading } = useFetch(getNews, {
         ...filters,
         keywords: debouncedKeywords,
     });

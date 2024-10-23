@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 export default function Pagination({ totalPages, handleNextPage, handlePreviousPage, handlePageClick, currentPage }) {
     return (
         <div className={ styles.pagination }>
-            {currentPage <= 1 ? null : <button onClick={handlePreviousPage} className={ styles.arrow }>{ '<' }</button>}
+            { currentPage <= 1 ? null : <button onClick={ handlePreviousPage } className={ styles.arrow }>{ '<' }</button> }
             
             <div className={ styles.list }>
                 {[...Array(totalPages)].map((_, index) => (
@@ -11,12 +11,14 @@ export default function Pagination({ totalPages, handleNextPage, handlePreviousP
                         onClick={() => handlePageClick(index + 1)} 
                         key={ index } 
                         disabled={ index + 1 === currentPage }
-                        className={styles.pageNumber}>{ index + 1 }
+                        className={ styles.pageNumber }
+                    >
+                        { index + 1 }
                     </button>
                 ))}
             </div>
             
-            { currentPage >= totalPages ? null : <button onClick={handleNextPage} className={ styles.arrow }>{ '>' }</button>}
+            { currentPage >= totalPages ? null : <button onClick={ handleNextPage } className={ styles.arrow }>{ '>' }</button> }
         </div>
     );
 }
